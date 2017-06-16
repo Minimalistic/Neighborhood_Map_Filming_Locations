@@ -1,11 +1,91 @@
 var map;
+
 // Create a new blank array for all the listing markers.
 var markers = [];
+
+
 function initMap() {
-// Constructor creates a new map - only center and zoom are required.
-map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 26.454856, lng: -82.0791250},
-    zoom: 13
+    // Styles array for map.
+    // Styling for map from snazzymaps.com - Style name is "Blue Essence" by
+    // "Famous Labs" https://twitter.com/famouslabs
+    // Direct link to style: https://snazzymaps.com/style/61/blue-essence
+    var styles = [ 
+    {
+        "featureType": "landscape.natural",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "color": "#f4ebc3"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "hue": "#1900ff"
+            },
+            {
+                "color": "#c0e8e8"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "lightness": 100
+            },
+            {
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.line",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "lightness": 700
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#7dcdcd"
+            }
+        ]
+    }
+]
+    // Constructor creates a new map - only center and zoom are required.
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 26.454856, lng: -82.0791250},
+        zoom: 13,
+        styles: styles,
+        mapTypeControl: false
 });
 
 function showListings() {
