@@ -138,17 +138,12 @@ function initMap() {
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker != marker) {
             // Clear infowindow content to allow streetview time to load
+            infowindow.setContent('');
             infowindow.marker = marker;
-            infowindow.setContent('<ul>' + '<h2>' + marker.title + '</h2>' + 
-                                            '<h4>' + 'Description' + '</h4>' +
-                                            marker.description +
-                                           '<h4>Latitude and Longitude</h4>' + 
-                                            marker.position + 
-                                  '</ul>');
             infowindow.open(map, marker);
             // Make sure the marker property is cleared if the infowindow is closed.
             infowindow.addListener('closeclick',function(){
-                infowindow.setMarker = null;
+                infowindow.marker = null;
             });
 
             var streetViewService = new google.maps.StreetViewService();
@@ -160,19 +155,30 @@ function initMap() {
                     var nearStreetViewLocation = data.location.latLng;
                     var heading = google.maps.geometry.spherical.computeHeading(
                         nearStreetViewLocation, marker.position);
-                        infowindow.setContent('<div>' + marker.title +  
-                                                '</div><div id="pano"></div>');
-                    var panoramaOptions = {
+                        infowindow.setContent('<ul>' + marker.title + 
+                                                '<h4>Description</h4>' +
+                                                marker.description +
+                                                '<h4>Latitude and Longitude</h4>' +
+                                                marker.position +
+                                              '</ul>' +
+                                              '<div id="pano"></div>');
+                        var panoramaOptions = {
                             position: nearStreetViewLocation,
                             pov: {
                                 heading: heading,
                                 pitch: 30
                         }
                     };
-                    var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
+                    var panorama = new google.maps.StreetViewPanorama(
+                        document.getElementById('pano'), panoramaOptions);
                 } else {
-                    infowindow.setContent('<div>' + marker.title + '</div>' +
-                        '<div>No Street View Available</div>');
+                    infowindow.setContent('<ul>' + marker.title + 
+                                                '<h4>Description</h4>' +
+                                                marker.description +
+                                                '<h4>Latitude and Longitude</h4>' +
+                                                marker.position +
+                                              '</ul>' +
+                        '<i>No Street View Available</i>');
                     }
                 }
                 // Find nearest streetview available within 50 meters of marker
