@@ -95,7 +95,9 @@ function initMap() {
     var highlightedIcon = makeMarkerIcon('f9e959');
 
     // Allows a pop up window when user clicks on a marker
-    var largeInfowindow = new google.maps.InfoWindow();
+    var largeInfowindow = new google.maps.InfoWindow({
+        maxWidth:250
+    });
 
     // The following group uses the location array to create an array of markers on initialize.
     for (var i = 0; i < locations.length; i++) {
@@ -155,15 +157,15 @@ function initMap() {
                     var nearStreetViewLocation = data.location.latLng;
                     var heading = google.maps.geometry.spherical.computeHeading(
                         nearStreetViewLocation, marker.position);
-                        infowindow.setContent('<ul>' + marker.title + 
+                        infowindow.setContent('<h2>' + marker.title + '</h2>' + 
+                                                '<div id="pano"></div>' +
                                                 '<h4>Description</h4>' +
-                                                marker.description +
+                                                '<p>' + marker.description + '</p>'+
                                                 '<h4>Latitude and Longitude</h4>' +
-                                                marker.position +
-                                              '</ul>' +
-                                              '<div id="pano"></div>');
+                                                marker.position);
                         var panoramaOptions = {
                             position: nearStreetViewLocation,
+                            scrollwheel:false,
                             pov: {
                                 heading: heading,
                                 pitch: 30
