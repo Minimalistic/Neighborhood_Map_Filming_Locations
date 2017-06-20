@@ -1,3 +1,5 @@
+// Majority of this information could be pulled from google's own database,
+// however the project requirements were recommending doing it manually.
 var locations = [
     {title: 'Sanibel Sprout', 
         location: {lat: 26.434856, lng: -82.0791256},
