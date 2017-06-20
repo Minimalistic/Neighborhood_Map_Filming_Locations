@@ -152,7 +152,7 @@ function initMap() {
             });
 
             var streetViewService = new google.maps.StreetViewService();
-            var radius = 50;
+            var radius = 100;
             // If the status is ok, compute streetview position,
             // calculate heading, get panorama and apply settings
             function getStreetView(data, status) {
