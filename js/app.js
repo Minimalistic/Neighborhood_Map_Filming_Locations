@@ -100,11 +100,11 @@ function initMap() {
     });
 
     // The following group uses the location array to create an array of markers on initialize.
-    for (var i = 0; i < locations.length; i++) {
+    for (var i = 0; i < locationsDatabase.length; i++) {
         // Get the position from the location array.
-        var position = locations[i].location;
-        var title = locations[i].title;
-        var description = locations[i].description;
+        var position = locationsDatabase[i].location;
+        var title = locationsDatabase[i].title;
+        var description = locationsDatabase[i].description;
         // Create a marker per location, and put into markers array.
         var marker = new google.maps.Marker({
             position: position,
@@ -132,6 +132,7 @@ function initMap() {
     document.getElementById('show-listings').addEventListener('click', showListings);
     document.getElementById('hide-listings').addEventListener('click', hideListings);
     }
+
     // This function populates the infowindow when the marker is clicked. We'll only allow
     // one infowindow which will open at the marker that is clicked, and populate based
     // on that markers position.
@@ -174,13 +175,13 @@ function initMap() {
                     var panorama = new google.maps.StreetViewPanorama(
                         document.getElementById('pano'), panoramaOptions);
                 } else {
-                    infowindow.setContent('<ul>' + marker.title + 
+                    infowindow.setContent('<h2>' + marker.title + '</h2>' +
+                                                '<i>No Street View Available</i>' +
+                                                '<div id="pano"></div>' +
                                                 '<h4>Description</h4>' +
-                                                marker.description +
+                                                '<p>' + marker.description + '</p>'+
                                                 '<h4>Latitude and Longitude</h4>' +
-                                                marker.position +
-                                              '</ul>' +
-                        '<i>No Street View Available</i>');
+                                                marker.position);
                     }
                 }
                 // Find nearest streetview available within 50 meters of marker

@@ -12,6 +12,16 @@ API Course, Lesson 1 -->
     <div class="container">
       <div class="options-box">
         <h1>Markers List</h1>
+        <div data-bind="with:locataionList" id="list">
+          <ul data-bind="foreach: locationsDatabase">
+            <li data-bind="text: title"></li>
+          </ul>
+        </div>
+
+        <span>Search Markers TODO
+          <input data-bind="textInput: Title">
+        </span>
+        <div id="available-locations"></div>
         <div>
           <input id="show-listings" type="button" value="Show Listings">
           <input id="hide-listings" type="button" value="Hide Listings">
@@ -19,6 +29,8 @@ API Course, Lesson 1 -->
       </div>
     <!--Google Maps map display div-->
     <div id="map"></div>
+
+    <script type='text/javascript' src='js/lib/knockout-3.4.2.js'></script>
 
     <script src="js/locations.js"></script>
     <script src="js/app.js"></script>
