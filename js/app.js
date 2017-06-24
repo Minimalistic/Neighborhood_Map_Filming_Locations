@@ -1,10 +1,7 @@
-// Variable for Google Maps
-var gmap;
-
-function LocationsViewModel() {
-    var self = this;
-
-    self.availableLocations = [
+var map;
+var markers = [];
+//////// Create an array of locations and their relevant info
+locations = [
     {
         title: 'Sanibel Sprout', 
         location: {lat: 26.434856, lng: -82.0791256},
@@ -36,16 +33,84 @@ function LocationsViewModel() {
         description: 'Main attraction are the tree crabs that can be seen amongst the branches of the Mangrove trees.'
     }
 ];
+
+function LocationsViewModel() {
+    var self = this;
+
+    self.locations
+    // Variable for Google Maps
+
+
 }
 
 ko.applyBindings(new LocationsViewModel());
 
-// Google Maps
+////GOOGLE MAPS////
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 26.454856, lng: -82.0791250},
         zoom: 13,
     });
+
+    var largeInfowindow = new google.maps.InfoWindow();
+    // Following section uses the location array to create a set of markers.
+    for (var i =0; i < locations.length; i++) {
+        // Get position from location array.
+        var position = locations[i].location;
+        var title = locations[i].title;
+        // Create one marker per location and place in markers array.
+        var marker = new google.maps.Marker({
+            map: map,
+            position: position,
+            title: title,
+            animation: google.maps.Animation.DROP,
+            id: i
+        });
+        // Push marker to array of markers.
+        markers.push(marker);
+        // Create onclick event that opens an infowindow at each marker.
+        marker.addListener('click', function() {
+            populateInfoWindow(this, largeInfowindow);
+        });
+    }
+
+    // This function populates the infowindow when marker is clicked.
+    // Only one infowindow is allowed to be open at a time and it's
+    // contents are populated based upon that markers location.
+    function populateInfoWindow(marker, infowindow) {
+        // Ensure infowindow isn't already opened on this marker.
+        if (infowindow.marker != marker) {
+            infowindow.marker = marker;
+            infowindow.setContent('<div>' + marker.title + '</div>');
+            infowindow.open(map, marker);
+            // Ensure marker property is cleared if infowindow is closed.
+            infowindow.addListener('closeclick',function(){
+                infowindow.setMarker(null);
+            });
+        }
+    }
+    // Marker styling
+    var defaultIcon = makeMarkerIcon('59f9af');
+
+    // Highlighted marker color for mouseover
+    var highlightedIcon = makeMarkerIcon('f9e959');
+
+    // Allows a pop up window when user clicks on a marker
+    var infowindow = new google.maps.InfoWindow({
+        maxWidth:250
+    });
+
+    // A function that applies a color to a new marker and defines it's size and origin
+    function makeMarkerIcon(markerColor) {
+        var markerImage = new google.maps.MarkerImage(
+            'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
+            '|40|_|%E2%80%A2',
+            new google.maps.Size(21, 34),
+            new google.maps.Point(0, 0),
+            new google.maps.Point(10, 34),
+            new google.maps.Size(21,34));
+        return markerImage;
+    }
 }
 
