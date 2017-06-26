@@ -45,7 +45,7 @@ function LocationsViewModel() {
 
 ko.applyBindings(new LocationsViewModel());
 
-////GOOGLE MAPS////
+//////////GOOGLE MAPS//////////
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
@@ -53,7 +53,9 @@ function initMap() {
         zoom: 13,
     });
 
-    var largeInfowindow = new google.maps.InfoWindow();
+    var largeInfowindow = new google.maps.InfoWindow({
+        maxWidth:250
+    });
     var bounds = new google.maps.LatLngBounds();
     // Following section uses the location array to create a set of markers.
     for (var i =0; i < locations.length; i++) {
@@ -111,7 +113,6 @@ function initMap() {
                                                 marker.position);
                         var panoramaOptions = {
                             position: nearStreetViewLocation,
-                            scrollwheel:false,
                             pov: {
                                 heading: heading,
                                 pitch: 30
@@ -135,10 +136,7 @@ function initMap() {
                 infowindow.open(map, marker);
                 }
             }
-        
-
     
-
     // This function loops through marker arrays and displays them all.
     function showListings() {
         var bounds = new google.maps.LatLngBounds();
@@ -180,4 +178,4 @@ function initMap() {
         return markerImage;
     }
 }
-
+////END Google Maps////
