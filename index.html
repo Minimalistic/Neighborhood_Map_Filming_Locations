@@ -13,15 +13,12 @@ API Course, Lesson 1 -->
 
       <div id="sidebar">
         <h1>Map App</h1>
-
-        <div>
           <input id="show-listings" type="button" value="Show Listings">
           <input id="hide-listings" type="button" value="Hide Listings">
-        </div>
         <h2>Places of Interest</h2>
-        <ul data-bind="foreach: locations">
-          <li data-bind="text: title"></li>
-        </ul>
+        <div type="button" data-bind="foreach: locations">
+          <button data-bind="text: title"></button>
+        </div>
       </div>
 
       <div id="map"></div>
