@@ -11,17 +11,21 @@ API Course, Lesson 1 -->
   <body>
 
 
-      <div id="sidebar">
+      <div id="sidebar" data-bind="with:locationList">
         <h1>Map App</h1>
           <input id="show-listings" type="button" value="Show Listings">
           <input id="hide-listings" type="button" value="Hide Listings">
+
         <h2>Places of Interest</h2>
+
+        <!-- For each stored location, generate a button with it's title as text and assign a unique id -->
         <div type="button" data-bind="foreach: locations">
-          <button data-bind="text: title"></button>
+          <button data-bind="text: title, click: $parent.selectLocation"></button>
         </div>
       </div>
 
-      <div id="map"></div>
+    <!-- Google Maps content rendered in 'map' div -->
+    <div id="map"></div>
 
 
     <script type='text/javascript' src='js/lib/knockout-3.4.2.js'></script>

@@ -34,16 +34,25 @@ locations = [
     }
 ];
 
-function LocationsViewModel() {
-    var self = this;
-
-    self.locations
-    // Variable for Google Maps
-
-
+var Location = function(data) {
+    this.title = ko.observable(data.title);
+    this.location = ko.observable(data.location);
+    this.description = ko.observable(data.description);
 }
 
-ko.applyBindings(new LocationsViewModel());
+var locationsViewModel = function () {
+    var self = this;
+
+    this.locationList = ko.observableArray([]);
+    // Variable for Google Maps
+
+    locations.forEach(function(locationItem){
+        self.locationList.push(new Location(locationItem) );
+    });
+
+};
+
+ko.applyBindings(new locationsViewModel());
 
 //////////GOOGLE MAPS//////////
 function initMap() {
@@ -79,6 +88,7 @@ function initMap() {
         });
     }
 
+    // Basic set of buttons that show and hide all location markers.
     document.getElementById('show-listings').addEventListener('click', showListings);
     document.getElementById('hide-listings').addEventListener('click', hideListings);
 
