@@ -41,6 +41,19 @@ var Location = function(data) {
     this.marker = data.marker;
 }
 
+var locationsViewModel = function () {
+    var self = this;
+
+    this.locationList = ko.observableArray([]);
+    // Variable for Google Maps
+
+    locations.forEach(function(locationItem){
+        self.locationList.push(new Location(locationItem) );
+    });
+};
+
+ko.applyBindings(new locationsViewModel());
+
 
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
@@ -55,7 +68,7 @@ function initMap() {
     var bounds = new google.maps.LatLngBounds();
     // Following section uses the location array to create a set of markers.
     for (var i = 0; i < locations.length; i++) {
-        // Get position from location array.
+        // Get position from location array.        
         var position = locations[i].location;
         var title = locations[i].title;
         var description = locations[i].description;
@@ -68,24 +81,15 @@ function initMap() {
             id: i
         });
 
+        
+        // Add marker as a property of each Location.
+        locations[i].marker = marker;
+
         // Create onclick event that opens an infowindow at each marker.
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
         });
     }
-
-    var locationsViewModel = function () {
-    var self = this;
-
-    this.locationList = ko.observableArray([]);
-    // Variable for Google Maps
-
-    locations.forEach(function(locationItem){
-        self.locationList.push(new Location(locationItem) );
-    });
-};
-
-ko.applyBindings(new locationsViewModel());
 
 
     // Basic set of buttons that show and hide all location markers.
@@ -150,18 +154,21 @@ ko.applyBindings(new locationsViewModel());
     // This function loops through marker arrays and displays them all.
     function showListings() {
         var bounds = new google.maps.LatLngBounds();
+
         // Extend boundaries of map for each marker and display them.
-        for (var i = 0; i < Location.length; i++) {
-            Location[i].setMap(map);
-            bounds.extend(Location[i].position);
+        for (var i = 0; i < locations.length; i++) {
+            var marker = locations[i].marker;
+            marker.setMap(map);
+            bounds.extend(marker.position);
         }
         map.fitBounds(bounds);
     }
 
     // Function loops through markers and hide them.
     function hideListings() {
-        for (var i = 0; i < Location.length; i++) {
-            Location[i].setMap(null);
+        for (var i = 0; i < locations.length; i++) {
+            var marker = locations[i].marker;
+            marker.setMap(null);
         }
     }
 
