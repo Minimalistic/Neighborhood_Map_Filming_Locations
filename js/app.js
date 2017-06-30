@@ -50,6 +50,11 @@ var locationsViewModel = function () {
     locations.forEach(function(locationItem){
         self.locationList.push(new Location(locationItem) );
     });
+    self.openInfoWindow = function(location) {
+        console.log(location)
+
+}
+
 };
 
 ko.applyBindings(new locationsViewModel());
@@ -95,6 +100,7 @@ function initMap() {
     // Basic set of buttons that show and hide all location markers.
     document.getElementById('show-listings').addEventListener('click', showListings);
     document.getElementById('hide-listings').addEventListener('click', hideListings);
+    
 
     // This function populates the infowindow when marker is clicked.
     // Only one infowindow is allowed to be open at a time and it's
