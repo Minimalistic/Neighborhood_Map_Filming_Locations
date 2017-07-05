@@ -1,5 +1,4 @@
 var map;
-var markers = [];
 //////// Create an array of locations and their relevant info
 locations = [
     {
@@ -54,7 +53,6 @@ var locationsViewModel = function () {
     self.openInfoWindow = function(location) {
         google.maps.event.trigger(location.marker, 'click')
     }
-
 };
 
 ko.applyBindings(new locationsViewModel());
@@ -63,8 +61,8 @@ ko.applyBindings(new locationsViewModel());
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 26.454856, lng: -82.0791250},
-        zoom: 13,
+        center: {lat: 26.454856, lng: -82.0961250},
+        zoom: 12,
     });
 
     var largeInfowindow = new google.maps.InfoWindow({
@@ -83,10 +81,11 @@ function initMap() {
             title: title,
             description: description,
             animation: google.maps.Animation.DROP,
-            id: i
+            id: i,
+            map: map
+
         });
 
-        
         // Add marker as a property of each Location.
         locations[i].marker = marker;
 
@@ -94,12 +93,9 @@ function initMap() {
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
         });
+
     }
 
-
-    // Basic set of buttons that show and hide all location markers.
-    document.getElementById('show-listings').addEventListener('click', showListings);
-    document.getElementById('hide-listings').addEventListener('click', hideListings);
 
     // This function populates the infowindow when marker is clicked.
     // Only one infowindow is allowed to be open at a time and it's
@@ -155,28 +151,6 @@ function initMap() {
                 infowindow.open(map, marker);
                 }
             }
-    
-    // This function loops through marker arrays and displays them all.
-    function showListings() {
-        var bounds = new google.maps.LatLngBounds();
-
-        // Extend boundaries of map for each marker and display them.
-        for (var i = 0; i < locations.length; i++) {
-            var marker = locations[i].marker;
-            marker.setMap(map);
-            bounds.extend(marker.position);
-        }
-        map.fitBounds(bounds);
-    }
-
-    // Function loops through markers and hide them.
-    function hideListings() {
-        for (var i = 0; i < locations.length; i++) {
-            var marker = locations[i].marker;
-            marker.setMap(null);
-        }
-    }
-
 
     // Marker styling
     var defaultIcon = makeMarkerIcon('59f9af');
