@@ -46,12 +46,18 @@ var locationsViewModel = function () {
     this.locationList = ko.observableArray([]);
     // Variable for Google Maps
 
-    // handles the HTML input element to search locations
+    // Updates with text input in HTML input box
     this.typedQuery = ko.observable('');
 
-    this.printToConsole = ko.computed(function() {
-        console.log(self.typedQuery());
-    });
+    search: function(value) {
+        locationsViewModel.locationList.removeAll();
+        
+        for(var x in locationList) {
+            if(locationList[x].title.toLowerCase().indexOf(value.toLowerCase()) >= 0) {
+                locationsViewModel.locationList.push(locationList[x]);
+            }
+        }
+    }
 
     locations.forEach(function(locationItem){
         self.locationList.push(new Location(locationItem) );
@@ -63,7 +69,7 @@ var locationsViewModel = function () {
 };
 
 ko.applyBindings(new locationsViewModel());
-
+locationsViewModel.query.subscribe(locationsViewModel.search);
 
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
