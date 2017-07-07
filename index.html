@@ -11,14 +11,20 @@ API Course, Lesson 1 -->
   <body>
 
 
-      <div id="sidebar" data-bind="with:locationList">
+      <div id="sidebar">
         <h1>Map App</h1>
-        <h2>Places of Interest</h2>
 
-        <!-- For each stored location, generate a button with it's title as text and assign a unique id -->
-        <div type="button" data-bind="foreach: locations">
-          <button id="show-marker" data-bind="text: title, click: $root.openInfoWindow"></button>
+        <label>Search</label>
+        <input data-bind="textInput: typedQuery"></input>
+
+        <div data-bind="with:locationList">
+          <h2>Places of Interest</h2>
+          <!-- For each stored location, generate a button with it's title as text and assign a unique id -->
+          <div type="button" data-bind="foreach: locations">
+            <button id="show-marker" data-bind="text: title, click: $root.openInfoWindow"></button>
+          </div>
         </div>
+        
       </div>
 
     <!-- Google Maps content rendered in 'map' div -->

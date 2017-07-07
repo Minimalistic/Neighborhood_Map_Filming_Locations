@@ -46,6 +46,13 @@ var locationsViewModel = function () {
     this.locationList = ko.observableArray([]);
     // Variable for Google Maps
 
+    // handles the HTML input element to search locations
+    this.typedQuery = ko.observable('');
+
+    this.printToConsole = ko.computed(function() {
+        console.log(self.typedQuery());
+    });
+
     locations.forEach(function(locationItem){
         self.locationList.push(new Location(locationItem) );
     });
