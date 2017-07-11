@@ -38,23 +38,30 @@ var Location = function(data) {
     this.location = data.location;
     this.description = data.description;
     this.marker = data.marker;
+    this.showItem = ko.observable(true);
 }
 
-var locationsViewModel = function () {
+var locationsViewModel = function() {
     var self = this;
 
     this.locationList = ko.observableArray([]);
     // Variable for Google Maps
 
-    // Updates with text input in HTML input box
     this.typedQuery = ko.observable('');
-
-    this.search = ko.computed(function() {
-        console.log(self.typedQuery());
-    });
 
     locations.forEach(function(locationItem){
         self.locationList.push(new Location(locationItem) );
+    });
+
+    filteredLocations = ko.computed(function() {
+        self.locationList().forEach(function(location) {
+            if (self.typedQuery()) {
+                var match = location.title.toLowerCase().indexOf(self.typedQuery().toLowerCase()) != -1;
+                location.showItem(match);
+            } else {
+                location.showItem(true);
+            }
+        });
     });
 
     self.openInfoWindow = function(location) {

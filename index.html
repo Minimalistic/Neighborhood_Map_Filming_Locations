@@ -14,8 +14,10 @@ API Course, Lesson 1 -->
       <div id="sidebar">
         <h1>Map App</h1>
 
-        <label>Search</label>
         <input data-bind="textInput: typedQuery"></input>
+        <ul data-bind="foreach: locations">
+          <li data-bind="text: name, visible: showItem"></li>
+        </ul>
 
         <div data-bind="with:locationList">
           <h2>Places of Interest</h2>
