@@ -16,7 +16,7 @@ API Course, Lesson 1 -->
 
         <input data-bind="textInput: typedQuery"></input>
         <ul data-bind="foreach: locationList">
-          <li data-bind="text: title, visible: showItem"></li>
+          <li data-bind="text: title, visible: showItem, click: $root.openInfoWindow"></li>
         </ul>
 
         <div data-bind="with:locationList">
