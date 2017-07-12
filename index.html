@@ -15,15 +15,15 @@ API Course, Lesson 1 -->
         <h1>Map App</h1>
 
         <input data-bind="textInput: typedQuery"></input>
-        <ul data-bind="foreach: locationList">
-          <li data-bind="text: title, visible: showItem, click: $root.openInfoWindow"></li>
-        </ul>
+        <div data-bind="foreach: locationList">
+          <button data-bind="text: title, visible: showItem, click: $root.openInfoWindow"></button>
+        </div>
 
         <div data-bind="with:locationList">
           <h2>Places of Interest</h2>
           <!-- For each stored location, generate a button with it's title as text and assign a unique id -->
           <div type="button" data-bind="foreach: locations">
-            <button id="show-marker" data-bind="text: title, click: $root.openInfoWindow"></button>
+            <button id="show-marker" data-bind="text: title"></button>
           </div>
         </div>
         

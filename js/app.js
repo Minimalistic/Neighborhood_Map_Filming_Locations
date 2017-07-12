@@ -102,6 +102,10 @@ function initMap() {
         // Add marker as a property of each Location.
         locations[i].marker = marker;
 
+        var vm = new locationsViewModel()
+
+        vm.locationList()[i].marker = marker;
+
         // Create onclick event that opens an infowindow at each marker.
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
