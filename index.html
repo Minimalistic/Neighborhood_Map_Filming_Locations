@@ -15,8 +15,8 @@ API Course, Lesson 1 -->
         <h1>Map App</h1>
 
         <input data-bind="textInput: typedQuery"></input>
-        <ul data-bind="foreach: locations">
-          <li data-bind="text: name, visible: showItem"></li>
+        <ul data-bind="foreach: locationList">
+          <li data-bind="text: title, visible: showItem"></li>
         </ul>
 
         <div data-bind="with:locationList">
