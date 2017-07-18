@@ -69,7 +69,8 @@ var locationsViewModel = function() {
     }
 };
 
-ko.applyBindings(new locationsViewModel());
+var vm = new locationsViewModel();
+ko.applyBindings(vm);
 
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
@@ -102,7 +103,7 @@ function initMap() {
         // Add marker as a property of each Location.
         locations[i].marker = marker;
 
-        var vm = new locationsViewModel()
+        var vm = new locationsViewModel();
 
         vm.locationList()[i].marker = marker;
 
