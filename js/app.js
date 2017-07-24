@@ -2,41 +2,48 @@ var map;
 //////// Create an array of locations and their relevant info
 locations = [
     {
-        title: 'Sanibel Sprout', 
-        location: {lat: 26.434856, lng: -82.0791256},
-        description: 'An excellent source for fresh fruit/veggie smoothies.'
+        location_name: 'Katz\'s Delicatessen',
+        location: {lat: 40.72221649999999, lng: -73.987503},
+        description: 'This restaurant was the filming location for the famous scene from "When Harry Met Sally" where Meg Ryan\'s character publicly fakes an orgasm at the table.',
+        movie_id: '639'
     },
     {
-        title: 'Shelling Beach',
-        location: {lat: 26.457203, lng: -82.153015},
-        description: 'The sand surrounding Sanibel Island is essentially made up entirely of sea shells, a really fun beach to explore.'
+        location_name: 'Tiffany & Co.',
+        location: {lat: 40.762541, lng: -73.97405029999999},
+        description: 'Tiffany & Co. was featured in the opening credits of "Breakfast at Tiffany\'s.',
+        movie_id: '164'
     },
     {
-        title: 'Lighthouse Beach',
-        location: {lat: 26.452853, lng: -82.014549},
-        description: 'Great place to walk around, take photographs.'
+        location_name: 'New York Public Library',
+        location: {lat: 40.75318230000001, lng: -73.98225339999999},
+        description: 'The New York Public Library was given the great honor of being a filming location for "Ghostbusters".  The library was the setting for the well known scene where the Ghostbusters crew investigates bizarre supernatural occurences.',
+        movie_id: '43074'
     },
     {
-        title: 'The Island Cow',
-        location: {lat: 26.437499, lng: -82.071067},
-        description: 'Excellent food, fun atmosphere.'
+        location_name: 'Corleone\'s Residence',
+        location: {lat: 40.6065057, lng: -74.09789749999999},
+        description: 'This house was depicted as the Corleone\'s family residence from the classic "The Godfather".',
+        movie_id: '238'
     },
     {
-        title: 'She Sells Sea Shells',
-        location: {lat: 26.436257, lng: -82.078388},
-        description: 'While you can find countless shells on the beach nearby, She Sells Sea Shells has a vast array of things to look at and a lot of them are quite pristine.'
+        location_name: 'Queensboro Bridge',
+        location: {lat: 40.757147, lng: -73.95512939999998},
+        description: 'Among one of the more consistently filmed bridges in movies, Ed Koch Queensboro Bridge can be seen in movies such as "Spider-Man" to classics such as "Manhattan"',
+        movie_id: '696'
     },
     {
-        title: 'Red Mangrove Island',
-        location: {lat: 26.429486, lng: -82.083688},
-        description: 'Main attraction are the tree crabs that can be seen amongst the branches of the Mangrove trees.'
+        location_name: 'Calvary Cemetery',
+        location: {lat: 40.7330559, lng: -73.91410150000002},
+        description: 'This cemetary was the setting for an incredibly important scene from The Godfather where the Corleone family attends a funeral.',
+        movie_id: '238'
     }
 ];
 
 var Location = function(data) {
-    this.title = data.title;
+    this.location_name = data.location_name;
     this.location = data.location;
     this.description = data.description;
+    this.movie_id = data.movie_id;
     this.marker = data.marker;
     this.showItem = ko.observable(true);
 }
@@ -56,7 +63,7 @@ var locationsViewModel = function() {
     filteredLocations = ko.computed(function() {
         self.locationList().forEach(function(location) {
             if (self.typedQuery()) {
-                var match = location.title.toLowerCase().indexOf(self.typedQuery().toLowerCase()) != -1;
+                var match = location.location_name.toLowerCase().indexOf(self.typedQuery().toLowerCase()) != -1;
                 location.showItem(match);
             } else {
                 location.showItem(true);
@@ -75,8 +82,9 @@ ko.applyBindings(vm);
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 26.454856, lng: -82.0961250},
-        zoom: 12,
+        // Set map default location showing New York.
+        center: {lat: 40.690000, lng: -73.979308},
+        zoom: 11,
     });
 
     var largeInfowindow = new google.maps.InfoWindow({
@@ -87,12 +95,12 @@ function initMap() {
     for (var i = 0; i < locations.length; i++) {
         // Get position from location array.        
         var position = locations[i].location;
-        var title = locations[i].title;
+        var location_name = locations[i].location_name;
         var description = locations[i].description;
         // Create one marker per location and place in markers array.
         var marker = new google.maps.Marker({
             position: position,
-            title: title,
+            location_name: location_name,
             description: description,
             animation: google.maps.Animation.DROP,
             id: i,
@@ -102,8 +110,6 @@ function initMap() {
 
         // Add marker as a property of each Location.
         locations[i].marker = marker;
-
-        var vm = new locationsViewModel();
 
         vm.locationList()[i].marker = marker;
 
@@ -130,7 +136,7 @@ function initMap() {
             });
 
             var streetViewService = new google.maps.StreetViewService();
-            var radius = 100;
+            var radius = 30;
             // If the status is ok, compute streetview position,
             // calculate heading, get panorama and apply settings
             function getStreetView(data, status) {
@@ -138,7 +144,7 @@ function initMap() {
                     var nearStreetViewLocation = data.location.latLng;
                     var heading = google.maps.geometry.spherical.computeHeading(
                         nearStreetViewLocation, marker.position);
-                        infowindow.setContent('<h2>' + marker.title + '</h2>' + 
+                        infowindow.setContent('<h2>' + marker.location_name + '</h2>' + 
                                                 '<div id="pano"></div>' +
                                                 '<h4>Description</h4>' +
                                                 '<p>' + marker.description + '</p>'+
@@ -148,13 +154,13 @@ function initMap() {
                             position: nearStreetViewLocation,
                             pov: {
                                 heading: heading,
-                                pitch: 30
+                                pitch: 20
                         }
                     };
                     var panorama = new google.maps.StreetViewPanorama(
                         document.getElementById('pano'), panoramaOptions);
                 } else {
-                    infowindow.setContent('<h2>' + marker.title + '</h2>' +
+                    infowindow.setContent('<h2>' + marker.location_name + '</h2>' +
                                                 '<i>No Street View Available</i>' +
                                                 '<div id="pano"></div>' +
                                                 '<h4>Description</h4>' +

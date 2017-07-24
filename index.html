@@ -12,19 +12,13 @@ API Course, Lesson 1 -->
 
 
       <div id="sidebar">
-        <h1>Map App</h1>
+        <i>Proper attribution for TMDB usage to be added to website</i>
+        <h1>New York Attractions</h1>
 
-        <input data-bind="textInput: typedQuery"></input>
+        <input data-bind="textInput: typedQuery" placeholder="Type something..."></input>
+        <label>Locations</label>
         <div data-bind="foreach: locationList">
-          <button data-bind="text: title, visible: showItem, click:"></button>
-        </div>
-
-        <div data-bind="with:locationList">
-          <h2>Places of Interest</h2>
-          <!-- For each stored location, generate a button with it's title as text and assign a unique id -->
-          <div type="button" data-bind="foreach: locations">
-            <button id="show-marker" data-bind="text: title"></button>
-          </div>
+          <button data-bind="text: location_name, visible: showItem, click: $root.openInfoWindow"></button>
         </div>
         
       </div>
