@@ -6,6 +6,8 @@ API Course, Lesson 1 -->
   http://untappedcities.com/2016/09/30/10-of-the-most-iconic-film-scene-locations-in-nyc/9/
 -->
 
+<!-- TODO Attribution for The Movie DB both in code and on website -->
+
 <html>
   <head>
     <!--Main CSS Stylesheet-->
@@ -23,15 +25,17 @@ API Course, Lesson 1 -->
         <div data-bind="foreach: locationList">
           <button data-bind="text: location_name, visible: showItem, click: $root.openInfoWindow"></button>
         </div>
-        
+
+        <h3>TMDB Related:</h3>
+        <ul id="tmdb_results"></ul>
       </div>
 
     <!-- Google Maps content rendered in 'map' div -->
     <div id="map"></div>
 
-
-    <!-- TODO Attribution for themoviedb.js -->
-    <script src="js/lib/themoviedb-javascript-library-master/themoviedb.js"></script>
+    <!-- JQuery used for querying The Movie DB -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/tmdb_script.js"></script>
     <!-- TODO Attribution for knockout.js -->
     <script type='text/javascript' src='js/lib/knockout-3.4.2.js'></script>
     <script src="js/app.js"></script>
