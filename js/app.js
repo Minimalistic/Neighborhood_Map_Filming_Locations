@@ -78,23 +78,22 @@ var locationsViewModel = function() {
     }
 };
 
-// The Movie Database code //
-$(document).ready(function(){
-    $.ajax({
-    url: 'http://api.themoviedb.org/3/search/movie?api_key=' + api_key + '&query=when+harry+met+sally',
-    dataType: 'jsonp',
-    jsonpCallback: 'callback'
-  }).done(function(response) {
-    for (var i = 0; i < response.results.length; i++) {
-      $('#tmdb_results').append('<li>' + response.results[i].title + '</li>');
-    }
-  });
-});
-// End Movie Database Code //
-
 var vm = new locationsViewModel();
 ko.applyBindings(vm);
 
+function getMovieData(location_name) {
+    $.ajax({
+        // Temporary url query - ultimately will utilize movie_id which is a movie
+        url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + location_name,
+        dataType: 'jsonp',
+        jsonpCallback: 'callback'
+    }).done(function(response) {
+        for (var i = 0; i < response.results.length; i++) {
+            $('#tmdb_results').append('<li>' + response.results[i].title + '</li>');
+        }
+
+    });
+}
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
@@ -132,6 +131,7 @@ function initMap() {
         // Create onclick event that opens an infowindow at each marker.
         marker.addListener('click', function() {
             populateInfoWindow(this, largeInfowindow);
+            getMovieData(this.title);
         });
 
     }
