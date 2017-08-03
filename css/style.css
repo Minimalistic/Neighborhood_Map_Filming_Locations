@@ -16,6 +16,11 @@ body {
     justify-content: space-between;
     flex-direction:row;
     flex-wrap:wrap;
+    overflow: scroll;
+    height:100%;
+    -webkit-box-shadow: inset -10px 0px 10px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset -10px 0px 10px -8px rgba(0,0,0,0.75);
+    box-shadow: inset -10px 0px 10px -8px rgba(0,0,0,0.75);
 }
 
 button {
@@ -28,6 +33,7 @@ input {
     font-size:1.25em;
     margin-top:2%;
     margin-bottom:2%;
+    background-color:#e8e8e8;
 }
 
 #map {

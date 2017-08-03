@@ -1,5 +1,3 @@
-// best practice is api_key should be obscured in some way from public, unlike how it is now.
-var api_key = 'ff56fc23c898727944c4ccce5862a4c0';
 var map;
 //////// Create an array of locations and their relevant info
 locations = [
@@ -84,14 +82,13 @@ ko.applyBindings(vm);
 function getMovieData(location_name) {
     $.ajax({
         // Temporary url query - ultimately will utilize movie_id which is a movie
-        url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + location_name,
+        url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + 'alien',
         dataType: 'jsonp',
         jsonpCallback: 'callback'
     }).done(function(response) {
         for (var i = 0; i < response.results.length; i++) {
             $('#tmdb_results').append('<li>' + response.results[i].title + '</li>');
         }
-
     });
 }
 function initMap() {
