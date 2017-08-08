@@ -79,10 +79,13 @@ var locationsViewModel = function() {
 vm = new locationsViewModel();
 ko.applyBindings(vm);
 
-function getMovieData(location_name) {
+function getMovieData(location) {
+
+    // TODO This movie_id should be actually being pulled from my locations array / clicked marker or list movie name.
+    movie_id = 'aliens'; 
+
     $.ajax({
-        // Temporary url query - ultimately will utilize movie_id which is a movie
-        url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + 'alien',
+        url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + aliens,
         dataType: 'jsonp',
         jsonpCallback: 'callback'
     }).done(function(response) {
