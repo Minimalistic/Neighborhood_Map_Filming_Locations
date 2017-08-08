@@ -46,7 +46,7 @@ var Location = function(data) {
     this.movie_id = data.movie_id;
     this.marker = data.marker;
     this.showItem = ko.observable(true);
-}
+};
 
 var locationsViewModel = function() {
     var self = this;
@@ -72,11 +72,11 @@ var locationsViewModel = function() {
     });
 
     self.openInfoWindow = function(location) {
-        google.maps.event.trigger(location.marker, 'click')
-    }
+        google.maps.event.trigger(location.marker, 'click');
+    };
 };
 
-var vm = new locationsViewModel();
+vm = new locationsViewModel();
 ko.applyBindings(vm);
 
 function getMovieData(location_name) {
@@ -96,7 +96,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         // Set map default location showing New York.
         center: {lat: 40.690000, lng: -73.979308},
-        zoom: 11,
+        zoom: 10,
     });
 
     var largeInfowindow = new google.maps.InfoWindow({
@@ -130,7 +130,6 @@ function initMap() {
             populateInfoWindow(this, largeInfowindow);
             getMovieData(this.title);
         });
-
     }
 
 
