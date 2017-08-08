@@ -2,37 +2,37 @@ var map;
 //////// Create an array of locations and their relevant info
 locations = [
     {
-        location_name: 'Katz\'s Delicatessen',
+        location_name: 'When Harry Met Sally',
         location: {lat: 40.72221649999999, lng: -73.987503},
-        description: 'This restaurant was the filming location for the famous scene from "When Harry Met Sally" where Meg Ryan\'s character publicly fakes an orgasm at the table.',
+        description: 'Katz\'s Delicatessen was the filming location for the famous scene from "When Harry Met Sally" where Meg Ryan\'s character publicly fakes an orgasm at the table.',
         movie_id: '639'
     },
     {
-        location_name: 'Tiffany & Co.',
+        location_name: 'Breakfast at Tiffany\'s',
         location: {lat: 40.762541, lng: -73.97405029999999},
         description: 'Tiffany & Co. was featured in the opening credits of "Breakfast at Tiffany\'s.',
         movie_id: '164'
     },
     {
-        location_name: 'New York Public Library',
+        location_name: 'Ghostbusters',
         location: {lat: 40.75318230000001, lng: -73.98225339999999},
         description: 'The New York Public Library was given the great honor of being a filming location for "Ghostbusters".  The library was the setting for the well known scene where the Ghostbusters crew investigates bizarre supernatural occurences.',
         movie_id: '43074'
     },
     {
-        location_name: 'Corleone\'s Residence',
+        location_name: 'The Godfather',
         location: {lat: 40.6065057, lng: -74.09789749999999},
         description: 'This house was depicted as the Corleone\'s family residence from the classic "The Godfather".',
         movie_id: '238'
     },
     {
-        location_name: 'Queensboro Bridge',
+        location_name: 'Manhattan',
         location: {lat: 40.757147, lng: -73.95512939999998},
         description: 'Among one of the more consistently filmed bridges in movies, Ed Koch Queensboro Bridge can be seen in movies such as "Spider-Man" to classics such as "Manhattan"',
         movie_id: '696'
     },
     {
-        location_name: 'Calvary Cemetery',
+        location_name: 'The Godfather',
         location: {lat: 40.7330559, lng: -73.91410150000002},
         description: 'This cemetary was the setting for an incredibly important scene from The Godfather where the Corleone family attends a funeral.',
         movie_id: '238'
@@ -80,9 +80,7 @@ vm = new locationsViewModel();
 ko.applyBindings(vm);
 
 function getMovieData(location) {
-    console.log(Location);
-    // TODO This movie_id should be actually being pulled from my locations array / clicked marker or list movie name.
-    movie_id = 'aliens'; 
+    // console.log(Location);
 
     $.ajax({
         url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + location,
@@ -130,7 +128,7 @@ function initMap() {
 
         // Create onclick event that opens an infowindow at each marker.
         marker.addListener('click', function() {
-            console.log(this.location_name, 'clicked');
+            // console.log(this.location_name, 'clicked');
             populateInfoWindow(this, largeInfowindow);
             getMovieData(this.location_name);
         });
