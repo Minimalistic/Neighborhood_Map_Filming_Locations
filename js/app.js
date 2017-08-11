@@ -32,6 +32,7 @@ locations = [
         movie_id: '696'
     },
     {
+        // TODO - different location to reduce redundancy of The Godfather.
         location_name: 'The Godfather',
         location: {lat: 40.7330559, lng: -73.91410150000002},
         description: 'This cemetary was the setting for an incredibly important scene from The Godfather where the Corleone family attends a funeral.',
@@ -50,6 +51,9 @@ var Location = function(data) {
 
 var locationsViewModel = function() {
     var self = this;
+
+    // Movie information from The Movie DB knockout observable.
+    this.movieInfo = ko.observable('');
 
     this.locationList = ko.observableArray([]);
     // Variable for Google Maps
@@ -81,7 +85,6 @@ ko.applyBindings(vm);
 
 function getMovieData(location) {
     // console.log(Location);
-
     $.ajax({
         url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + location,
         dataType: 'jsonp',
@@ -105,11 +108,11 @@ function initMap() {
     });
     var bounds = new google.maps.LatLngBounds();
     // Following section uses the location array to create a set of markers.
-    for (var i = 0; i < locations.length; i++) {
+    locations.forEach(function(location, i) {
         // Get position from location array.        
-        var position = locations[i].location;
-        var location_name = locations[i].location_name;
-        var description = locations[i].description;
+        var position = location.location;
+        var location_name = location.location_name;
+        var description = location.description;
         // Create one marker per location and place in markers array.
         var marker = new google.maps.Marker({
             position: position,
@@ -118,11 +121,10 @@ function initMap() {
             animation: google.maps.Animation.DROP,
             id: i,
             map: map
-
         });
 
         // Add marker as a property of each Location.
-        locations[i].marker = marker;
+        location.marker = marker;
 
         vm.locationList()[i].marker = marker;
 
@@ -132,7 +134,7 @@ function initMap() {
             populateInfoWindow(this, largeInfowindow);
             getMovieData(this.location_name);
         });
-    }
+    });
 
 
     // This function populates the infowindow when marker is clicked.
@@ -153,7 +155,7 @@ function initMap() {
             var radius = 30;
             // If the status is ok, compute streetview position,
             // calculate heading, get panorama and apply settings
-            function getStreetView(data, status) {
+            var getStreetView = function(data, status) {
                 if (status == 'OK') {
                     var nearStreetViewLocation = data.location.latLng;
                     var heading = google.maps.geometry.spherical.computeHeading(
@@ -182,7 +184,7 @@ function initMap() {
                                                 '<h4>Latitude and Longitude</h4>' +
                                                 marker.position);
                     }
-                }
+                };
                 // Find nearest streetview available within 50 meters of marker
                 streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
                 // Open infowindow on relevant marker.
