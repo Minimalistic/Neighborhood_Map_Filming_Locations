@@ -100,11 +100,12 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         // Set map default location showing New York.
         center: {lat: 40.690000, lng: -73.979308},
-        zoom: 10,
+        zoom: 11,
+        scrollwheel: false,
     });
-
+    
     var largeInfowindow = new google.maps.InfoWindow({
-        maxWidth:250
+        maxWidth:300
     });
     var bounds = new google.maps.LatLngBounds();
     // Following section uses the location array to create a set of markers.
@@ -168,10 +169,11 @@ function initMap() {
                                                 marker.position);
                         var panoramaOptions = {
                             position: nearStreetViewLocation,
+                            scrollwheel: false,
                             pov: {
                                 heading: heading,
                                 pitch: 20
-                        }
+                            }
                     };
                     var panorama = new google.maps.StreetViewPanorama(
                         document.getElementById('pano'), panoramaOptions);

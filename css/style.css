@@ -1,53 +1,90 @@
-* {
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+/** {
     box-sizing: border-box;
 }
+*/
 
-body {
+html, body {
+    height: 100%;
+
+}
+
+h1, h2, h3, h4 {
+}
+
+
+input {
+    text-align:center;
+    width:100%;
+    background-color:#e8e8e8;
+}
+
+#flexbox-container {
+    display:flex;
+    width:100%;
+}
+
+#main_bar {
+    width:100%;
+    background-color:blue;
+}
+
+button {
+    background-color:white;
+    width:100%;
+}
+
+#sub_bar {
+    background-color:yellow;
+    position:fixed;
+    width:100%;
+    left:0;
+    right:0;
+    overflow:scroll;
+    height:200px;
+}
+#sub_bar h5 {
     padding:0;
     margin:0;
 }
 
-#sidebar {
-    padding: 1%;
-    margin:0;
-    width:25%;
-    max-width:300px;
-    display:flex;
-    justify-content: space-between;
-    flex-direction:row;
-    flex-wrap:wrap;
-    overflow: scroll;
-    height:100%;
-    -webkit-box-shadow: inset -10px 0px 10px -8px rgba(0,0,0,0.75);
-    -moz-box-shadow: inset -10px 0px 10px -8px rgba(0,0,0,0.75);
-    box-shadow: inset -10px 0px 10px -8px rgba(0,0,0,0.75);
+#sub_bar ul {
+    list-style-type: none;
+    text-align:center;
+}
+#sub_bar img{
+    max-width:128px;
+    min-width:50px;
+    position:fixed;
+    right:0;
 }
 
-button {
-    width:100%;
-    font-size:1em;
+#tmdb_results {
+
 }
 
-input {
-    width:100%;
-    font-size:1.25em;
-    margin-top:2%;
-    margin-bottom:2%;
-    background-color:#e8e8e8;
-    height:1.5em;
+#map_body {
+    flex: 1;
+    position:relative;
+    height:50%;
 }
 
 #map {
-    min-height:100%;
-    width:75%;
-    bottom:0px;
-    right: 0px;
-    position: absolute;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    max-height:100%;
 }
-
-
 
 #pano {
-        width: 250px;
-        height: 250px;
+    min-height: 100px;
 }
+
+/* Styling for google maps, google maps infowindow */
+.gm-style .gm-style-iw {
+    font-size:3vw;
+}
+
