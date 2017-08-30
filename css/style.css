@@ -7,12 +7,11 @@
 
 html, body {
     height: 100%;
-
 }
 
-h1, h2, h3, h4 {
+p, h1, h2, h3, h4, h5, ul, li, button {
+    font-size:5vw;
 }
-
 
 input {
     text-align:center;
@@ -33,6 +32,7 @@ input {
 button {
     background-color:white;
     width:100%;
+    max-height: 10%;
 }
 
 #sub_bar {
@@ -42,7 +42,7 @@ button {
     left:0;
     right:0;
     overflow:scroll;
-    height:200px;
+    height:300px;
 }
 #sub_bar h5 {
     padding:0;
@@ -81,10 +81,10 @@ button {
 
 #pano {
     min-height: 100px;
+    max-height:250px;
 }
 
-/* Styling for google maps, google maps infowindow */
+ /* Styling for google maps, google maps infowindow */
 .gm-style .gm-style-iw {
-    font-size:3vw;
 }
 
