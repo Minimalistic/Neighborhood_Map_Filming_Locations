@@ -91,7 +91,7 @@ function getMovieData(location) {
         jsonpCallback: 'callback'
     }).done(function(response) {
         for (var i = 0; i < response.results.length; i++) {
-            $('#tmdb_results').append('<li>' + response.results[i].title + '</li>');
+            $('#tmdb_results').append('<p>' + response.results[i].title + '</p>');
         }
     });
 }
@@ -100,7 +100,7 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         // Set map default location showing New York.
         center: {lat: 40.690000, lng: -73.979308},
-        zoom: 11,
+        zoom: 10,
         scrollwheel: false,
     });
     

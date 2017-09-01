@@ -4,45 +4,61 @@ API Course, Lesson 1 -->
 
 <html>
   <head>
+    <meta charset="utf-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!--Main CSS Stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/style.css">
-  </head>
+<link href="https://fonts.googleapis.com/css?family=Arima+Madurai:200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono" rel="stylesheet">
+</head>
 
   <body>
-    <div id="flexbox-container">
-      <div id="main_bar">
-        <i>Locations and film locations courtesy of 
-          <a href="http://untappedcities.com/2016/09/30/10-of-the-most-iconic-film-scene-locations-in-nyc/9/">
-            UntappedCities.com
-          </a>
-        </i>
+    <div id="main_app">
+      <div id="flexbox-container">
+        <div id="main_bar">
 
-        <!-- Filming locations and related films courtesy of untappedcities.com -->
-        <h1>New York Filming Locations</h1>
 
-        <input data-bind="textInput: typedQuery" placeholder="Filter Locations..."></input>
-        <div data-bind="foreach: locationList">
-          <button data-bind="text: location_name, visible: showItem, click: $root.openInfoWindow"></button>
+          <!-- Filming locations and related films courtesy of untappedcities.com -->
+          <h3>New York Filming Locations</h3>
+
+          <input data-bind="textInput: typedQuery" placeholder="Filter Locations..."></input>
+          <div data-bind="foreach: locationList">
+            <button id ="film" data-bind="text: location_name, visible: showItem, click: $root.openInfoWindow"></button>
+          </div>
         </div>
       </div>
-    </div>
 
-      <div id="map_body">
-        <!-- Google Maps content rendered in 'map' div -->
-        <div id="map"></div>
+        <div id="map_body">
+          <!-- Google Maps content rendered in 'map' div -->
+          <div id="map"></div>
+        </div>
+
+        <div id="similar_movies">
+          <h5>Similar Titles:</h5>
+        </div>
+
+
+        <div id="sub_bar">
+          <!-- Movie information courtesy of themoviedb.org -->
+
+          
+          <div id="tmdb_results"></div>
+
+        </div>
       </div>
 
+      <footer>
+          <i>Locations and film locations courtesy of 
+            <a href="http://untappedcities.com/2016/09/30/10-of-the-most-iconic-film-scene-locations-in-nyc/9/">
+              UntappedCities.com
+            </a>
+          </i>
 
-      <div id="sub_bar">
-        <!-- Movie information courtesy of themoviedb.org -->
-        <a href="https://www.themoviedb.org">
-          <img alt="TheMovieDB.org" src="img/408x161-powered-by-rectangle-green.png" width="100">
-        </a>
-        
-        <h5>Related Movie Information</h5>
-        <ul id="tmdb_results"></ul>
-
-      </div>
+                    <a id="movie_db_logo" href="https://www.themoviedb.org">
+            <img alt="TheMovieDB.org" src="img/408x161-powered-by-rectangle-green.png" width="64">
+          </a>
+      </footer>
     <!-- JQuery used for querying The Movie DB -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!-- TODO Attribution for knockout.js -->
