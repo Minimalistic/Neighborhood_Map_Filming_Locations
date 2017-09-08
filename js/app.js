@@ -69,6 +69,8 @@ var locationsViewModel = function() {
             if (self.typedQuery()) {
                 var match = location.location_name.toLowerCase().indexOf(self.typedQuery().toLowerCase()) != -1;
                 location.showItem(match);
+                // Filter out map markers
+                location.marker.setVisible(match);
             } else {
                 location.showItem(true);
             }
@@ -123,6 +125,8 @@ function initMap() {
             id: i,
             map: map
         });
+        // Call function to trigger marker bounce on click.
+        marker.addListener('click', toggleBounce);
 
         // Add marker as a property of each Location.
         location.marker = marker;
@@ -135,6 +139,21 @@ function initMap() {
             populateInfoWindow(this, largeInfowindow);
             getMovieData(this.location_name);
         });
+
+        function toggleBounce() {
+            if (marker.getAnimation() !== null) {
+                marker.setAnimation(null);
+            } else {
+                marker.setAnimation(google.maps.Animation.BOUNCE);
+                stopBounceAnimation(marker);
+            }
+        }
+
+        function stopBounceAnimation() {
+            setTimeout(function () {
+                marker.setAnimation(null);
+            }, 800);
+        }
     });
 
 
