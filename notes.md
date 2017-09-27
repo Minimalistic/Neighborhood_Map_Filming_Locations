@@ -17,3 +17,6 @@ You shall place the following notice prominently on your application: "This prod
 Any use of the TMDb logo in your application shall be less prominent than the logo or mark that primarily describes the application and your use of the TMDb logo shall not imply any endorsement by TMDb. -->
 
 7-27-17 Add proper attribution additionally for https://github.com/cavestri/themoviedb-javascript-library/
+
+9-18-17 Replace ajax data so list doesn't become unrelated and ridiculously long.
+    Redesign how data is pulled from themoviedb so it isn't using JQuery and is instead, using Knockout.js
