@@ -93,7 +93,8 @@ function getMovieData(location) {
         jsonpCallback: 'callback'
     }).done(function(response) {
         for (var i = 0; i < response.results.length; i++) {
-            $('#tmdb_results').append('<p>' + response.results[i].title + '</p>');
+             //Currently only returns and displays last item retrieved
+            $('#tmdb_results').html('<p>' + response.results[i].title + '</p>');
         }
     });
 }
@@ -104,6 +105,7 @@ function initMap() {
         center: {lat: 40.690000, lng: -73.979308},
         zoom: 10,
         scrollwheel: false,
+        disableDefaultUI: true
     });
     
     var largeInfowindow = new google.maps.InfoWindow({
