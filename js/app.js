@@ -35,7 +35,7 @@ locations = [
         // TODO - different location to reduce redundancy of The Godfather.
         location_name: 'The Godfather',
         location: {lat: 40.7330559, lng: -73.91410150000002},
-        description: 'This cemetary was the setting for an incredibly important scene from The Godfather where the Corleone family attends a funeral.',
+        description: 'This cemetery was the setting for an incredibly important scene from The Godfather where the Corleone family attends a funeral.',
         movie_id: '238'
     }
 ];
