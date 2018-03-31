@@ -5,19 +5,20 @@
 }
 */
 
+
 html, body {
     height: 100%;
     margin: 0 auto;
     font-family: 'Droid Sans Mono', monospace;
 }
 
+body {
+}
+
 h3 {
-    font-size: 2em;
+    text-align:center;
+    font-size: 1.75em;
     font-family: 'Arima Madurai', cursive;
-    background: rgba(0, 255, 255, .2); 
-    -webkit-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.51);
-    -moz-box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.51);
-    box-shadow: 0px 2px 6px 0px rgba(0,0,0,0.51);
     padding-left:2%;
     padding-right:2%;
     margin:0;
@@ -30,50 +31,43 @@ h5 {
     font-weight: 100;
 }
 
-
-
 input {
     text-align:center;
     font-size:1.2em;
-    margin:1%;
+    width:100%;
+}
+
+#main_app {
 }
 
 #flexbox-container {
-    display:flex;
-    width:100%;
+    z-index: 99;
+    width: 100%;
 }
 
 #main_bar {
     width:100%;
     text-align:center;
-    margin: 1vw;
-    background-color: #7a9989;
     color:white;
-    padding-bottom:2%;
 }
 
 
 button {
     color:white;
-    background: rgba(0, 0, 0, .3); 
-    min-height:5vw;
-    min-width:40vw;
-    margin:.5%;
-    border-radius: 5px;
-
+    background-color:#329351;
+    width:100%;
+    max-width:400px;
+    min-height:40px;
 }
 
 button:hover {
-    background: rgba(0, 255, 255, .5); }
+    background-color: #1d472a;}
 
 #sub_bar {
     overflow:scroll;
     max-height:25vw;
-    margin:2%;
     border-style: solid;
     border-width: 1px;
-    border-color: grey;
-    background-color:#e5e5e5;
 }
 
 
@@ -101,13 +95,15 @@ button:hover {
     padding-right:2%;
 }
 #tmdb_results {
-    background-color:#e5e5e5;
+    color:white;
+    background-color:#329351;
+    text-align:center;
 }
 
 #map_body {
     flex: 1;
     position:relative;
-    height:40%;
+    height:100%;
     margin-left: 1vw;
     margin-right: 1vw;
 }
@@ -122,15 +118,44 @@ button:hover {
 }
 
 #pano {
-    min-height: 100px;
-    max-height:250px;
-}
-
-footer {
-    padding:2%;
+    min-height: 200px;
+    max-height:300px;
 }
 
 
  /* Styling for google maps, google maps infowindow */
 .gm-style .gm-style-iw {
 }
+
+/** START Media Queries **/
+
+/* Tiny devices and up */
+@media (min-width: 576px) {
+    #flexbox-container {
+        width:33.5%;
+        float:left;
+        position:absolute;
+    }
+
+    button {
+        max-width: 150px;
+    }
+    #map {
+        margin-left: auto;
+        width:66.5%;
+    }
+}
+
+/* Large devices and up */
+@media (min-width: 992px) {
+    #flexbox-container {
+        width:20%;
+    }
+    #map {
+        width: 80%;
+    }
+
+
+}
+
+/** END Media Queries **/

@@ -49,6 +49,7 @@ var Location = function(data) {
     this.showItem = ko.observable(true);
 };
 
+
 var locationsViewModel = function() {
     var self = this;
 
@@ -109,7 +110,7 @@ function initMap() {
     });
     
     var largeInfowindow = new google.maps.InfoWindow({
-        maxWidth:300
+        maxWidth:350
     });
     var bounds = new google.maps.LatLngBounds();
     // Following section uses the location array to create a set of markers.
@@ -214,6 +215,7 @@ function initMap() {
                 infowindow.open(map, marker);
                 }
             }
+
 
     // Marker styling
     var defaultIcon = makeMarkerIcon('59f9af');

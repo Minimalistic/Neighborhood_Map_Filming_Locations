@@ -15,17 +15,33 @@ API Course, Lesson 1 -->
 
   <body>
     <div id="main_app">
+      <h3>New York Filming Locations</h3>
       <div id="flexbox-container">
         <div id="main_bar">
 
           <!-- Filming locations and related films courtesy of untappedcities.com -->
-          <h3>New York Filming Locations</h3>
 
           <input data-bind="textInput: typedQuery" placeholder="Filter Locations..."></input>
           <div data-bind="foreach: locationList">
             <button id ="film" data-bind="text: location_name, visible: showItem, click: $root.openInfoWindow"></button>
           </div>
         </div>
+          <div id="similar_movies">
+            <h5>Related Result:</h5>
+        </div>
+
+
+        <div id="sub_bar">
+          <!-- Movie information courtesy of themoviedb.org -->          
+          <div id="tmdb_results"></div>
+        </div>
+          <i>Locations and film locations courtesy of 
+            <a href="http://untappedcities.com/2016/09/30/10-of-the-most-iconic-film-scene-locations-in-nyc/9/">
+              UntappedCities.com
+            </a>
+          </i>
+      </div>
+
       </div>
 
         <div id="map_body">
@@ -33,26 +49,8 @@ API Course, Lesson 1 -->
           <div id="map"></div>
         </div>
 
-        <div id="similar_movies">
-          <h5>Related Result:</h5>
-        </div>
-
-
-        <div id="sub_bar">
-          <!-- Movie information courtesy of themoviedb.org -->
-
-          
-          <div id="tmdb_results"></div>
-
-        </div>
-      </div>
-
       <footer>
-          <i>Locations and film locations courtesy of 
-            <a href="http://untappedcities.com/2016/09/30/10-of-the-most-iconic-film-scene-locations-in-nyc/9/">
-              UntappedCities.com
-            </a>
-          </i>
+
 
                     <a id="movie_db_logo" href="https://www.themoviedb.org">
             <img alt="TheMovieDB.org" src="img/408x161-powered-by-rectangle-green.png" width="64">
