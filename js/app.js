@@ -87,15 +87,15 @@ vm = new locationsViewModel();
 ko.applyBindings(vm);
 
 function getMovieData(location) {
-    // console.log(Location);
+    console.log(Location);
     $.ajax({
         url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + location,
         dataType: 'jsonp',
         jsonpCallback: 'callback'
     }).done(function(response) {
         for (var i = 0; i < response.results.length; i++) {
-             //Currently only returns and displays last item retrieved
-            $('#tmdb_results').html('<p>' + response.results[i].title + '</p>');
+            // This data to be mapped to a knockout observable...
+            alert(response.results[i].title);
         }
     });
 }
