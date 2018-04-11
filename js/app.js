@@ -54,7 +54,7 @@ var locationsViewModel = function() {
     var self = this;
 
     // Movie information from The Movie DB knockout observable.
-    this.movieInfo = ko.observable('');
+    this.movieInfo = "PLACEHOLDER MOVIE INFO";
 
     this.locationList = ko.observableArray([]);
     // Variable for Google Maps
@@ -86,19 +86,20 @@ var locationsViewModel = function() {
 vm = new locationsViewModel();
 ko.applyBindings(vm);
 
-function getMovieData(location) {
-    console.log(Location);
-    $.ajax({
-        url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + location,
-        dataType: 'jsonp',
-        jsonpCallback: 'callback'
-    }).done(function(response) {
-        for (var i = 0; i < response.results.length; i++) {
-            // This data to be mapped to a knockout observable...
-            alert(response.results[i].title);
-        }
-    });
-}
+// function getMovieData(location) {
+//     console.log(Location);
+//     $.ajax({
+//         url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + location,
+//         dataType: 'jsonp',
+//         jsonpCallback: 'callback'
+//     }).done(function(response) {
+//         for (var i = 0; i < response.results.length; i++) {
+//             //Currently only returns and displays last item retrieved
+//             // $('#tmdb_results').html('<p>' + response.results[i].title + '</p>');
+//             alert(response.results[i].title);
+//         }
+//     });
+// }
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
@@ -140,7 +141,7 @@ function initMap() {
         marker.addListener('click', function() {
             // console.log(this.location_name, 'clicked');
             populateInfoWindow(this, largeInfowindow);
-            getMovieData(this.location_name);
+            // getMovieData(this.location_name);
         });
 
         function toggleBounce() {
