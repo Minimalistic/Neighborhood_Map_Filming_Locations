@@ -88,14 +88,18 @@ ko.applyBindings(vm);
 
 function getMovieData(location) {
     console.log(Location);
+
     $.ajax({
         url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + location,
         dataType: 'jsonp',
-        jsonpCallback: 'callback'
-    }).done(function(response) {
-         if(response.results.length>0){
-            vm.movieInfo(JSON.stringify(response.results[0]));
-         }
+        jsonpCallback: 'callback',
+
+        success: function (response) {
+            if (response.results.length > 0) {
+                vm.movieInfo(JSON.stringify(response.results[0].vote_average));
+            }
+   }
+
    })
 }
 function initMap() {
