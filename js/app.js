@@ -89,19 +89,25 @@ ko.applyBindings(vm);
 function getMovieData(location) {
     console.log(Location);
 
-    $.ajax({
+    var request = $.ajax({
         url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + location,
         dataType: 'jsonp',
-        jsonpCallback: 'callback',
+        jsonpCallback: 'callback'
+    });
 
-        success: function (response) {
-            if (response.results.length > 0) {
-                vm.movieInfo(JSON.stringify(response.results[0].vote_average));
-            }
-   }
+    // If there's some info returned, prep it and place in movieInfo for HTML 
+    request.done(function (response) {
+        if (response.results.length > 0) {
+            vm.movieInfo(JSON.stringify(response.results[0].vote_average));
+        }
+    });
 
-   })
+    // Alert user if TheMovieDB is not returning information
+    request.fail(function () {
+        alert('TheMovieDB information not available at this time, please try again in a little while');
+    });
 }
+
 function initMap() {
     // Constructor creates a new map - only center and zoom are required.
     map = new google.maps.Map(document.getElementById('map'), {
@@ -242,4 +248,11 @@ function initMap() {
             new google.maps.Size(21,34));
         return markerImage;
     }
+
+    // Error message handling for Google Maps
+    function googleError() {
+    alert('Error loading Google Maps, please try again later.')
+    }
+
 }
+
