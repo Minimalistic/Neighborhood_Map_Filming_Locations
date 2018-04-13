@@ -54,26 +54,28 @@ var locationsViewModel = function() {
     var self = this;
 
     // Movie information from The Movie DB knockout observable.
-    this.movieInfo = ko.observable('')
+    this.movieInfo = ko.observable('');
 
     this.locationList = ko.observableArray([]);
     // Variable for Google Maps
 
-    this.typedQuery = ko.observable('');
+    this.typedQuery = ko.observable();
 
     locations.forEach(function(locationItem){
         self.locationList.push(new Location(locationItem) );
     });
 
+
     filteredLocations = ko.computed(function() {
         self.locationList().forEach(function(location) {
-            if (self.typedQuery()) {
+            if (self.typedQuery() != null) {
+
+                // Filter available locations
                 var match = location.location_name.toLowerCase().indexOf(self.typedQuery().toLowerCase()) != -1;
                 location.showItem(match);
+
                 // Filter out map markers
                 location.marker.setVisible(match);
-            } else {
-                location.showItem(true);
             }
         });
     });
@@ -83,27 +85,28 @@ var locationsViewModel = function() {
     };
 };
 
+// Error message handling for Google Maps
+function googleError() {
+    alert('Error loading Google Maps, please try again later.');
+}
+
 vm = new locationsViewModel();
 ko.applyBindings(vm);
 
 function getMovieData(location) {
-    console.log(Location);
-
     var request = $.ajax({
         url: 'http://api.themoviedb.org/3/search/movie?api_key=ff56fc23c898727944c4ccce5862a4c0&query=' + location,
         dataType: 'jsonp',
         jsonpCallback: 'callback'
-    });
 
     // If there's some info returned, prep it and place in movieInfo for HTML 
-    request.done(function (response) {
+    }).done(function (response) {
         if (response.results.length > 0) {
             vm.movieInfo(JSON.stringify(response.results[0].vote_average));
         }
-    });
 
     // Alert user if TheMovieDB is not returning information
-    request.fail(function () {
+    }).fail(function () {
         alert('TheMovieDB information not available at this time, please try again in a little while');
     });
 }
@@ -164,7 +167,7 @@ function initMap() {
         function stopBounceAnimation() {
             setTimeout(function () {
                 marker.setAnimation(null);
-            }, 800);
+            }, 1400);
         }
     });
 
@@ -248,11 +251,20 @@ function initMap() {
             new google.maps.Size(21,34));
         return markerImage;
     }
+}
+// Hello.
+//
+// This is JSHint, a tool that helps to detect errors and potential
+// problems in your JavaScript code.
+//
+// To start, simply enter some JavaScript anywhere on this page. Your
+// report will appear on the right side.
+//
+// Additionally, you can toggle specific options in the Configure
+// menu.
 
-    // Error message handling for Google Maps
-    function googleError() {
-    alert('Error loading Google Maps, please try again later.')
-    }
-
+function main() {
+  return 'Hello, World!';
 }
 
+main();
