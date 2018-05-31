@@ -1,6 +1,6 @@
 # Neighborhood Map Filming Locations
 
-![live site image for Neighborhood Map Filming Locations](https://www.github.com/Neighborhood_Map_Filming_Locations/img/film_locations_ss.png "Live Site")
+![live site image for Neighborhood Map Filming Locations](https://github.com/Minimalistic/Neighborhood_Map_Filming_Locations/img/film_locations_ss.png "Live Site")
 
 [Live site](http://jasonhmarsh.com/Neighborhood_Map_Filming_Locations/)
 
