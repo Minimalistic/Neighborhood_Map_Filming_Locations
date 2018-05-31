@@ -1,4 +1,9 @@
 # Neighborhood Map Filming Locations
+
+![live site image for Neighborhood Map Filming Locations](Neighborhood_Map_Filming_Locations/img/film_locations_ss.png "Live Site")
+
+[Live site](http://jasonhmarsh.com/Neighborhood_Map_Filming_Locations/)
+
 Goal of the project was to develop a single page application featuring a map of populated with information relevant to the application. Project also needed additional functionality including highlighted locations on the map and third-party data about those locations and various ways to browse the content.
 
 I ultimately settled on having a map of New York and populating it with a number of markers for filming locations for well known movie scenes.  To satisfy the third-party data, I used [TheMovieDB's](https://www.themoviedb.org) third-party API.
